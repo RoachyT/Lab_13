@@ -11,6 +11,7 @@ namespace Lab_13
         static int winCount = 0;
         static int tieCount = 0;
        static int lossCount = 0;
+        static Validator Val = new Validator();
 
         static void Main(string[] args)
         {
@@ -19,7 +20,6 @@ namespace Lab_13
             string userName = Console.ReadLine();
             Player3 User = new Player3(userName);
             GameON(User);
-            
         }
 
        static void GameON(Player3 User)
@@ -34,7 +34,7 @@ namespace Lab_13
             Console.WriteLine("Rock, Paper or Scissors? R/P/S?");
             string shoot = (Console.ReadLine().ToUpper());
                 
-                Validator Val = new Validator();
+               
                 bool flag = true;
                 flag = Val.Validation(shoot);
                 while (flag)
@@ -53,13 +53,13 @@ namespace Lab_13
                             PlayAgain(User);
 
                         }
-                        if (opponent == Roshambo.Rock && user == Roshambo.Paper)
+                        else if (opponent == Roshambo.Rock && user == Roshambo.Paper)
                         {
                             Console.WriteLine($"{User.Name} wins!");
                             winCount++;
                             PlayAgain(User);
                         }
-                        if (opponent == Roshambo.Rock && user == Roshambo.Scissors)
+                        else if (opponent == Roshambo.Rock && user == Roshambo.Scissors)
                         {
                             Console.WriteLine($"Bowser wins!");
                             lossCount++;
@@ -122,6 +122,7 @@ namespace Lab_13
             {
                 Console.WriteLine($"You won {winCount} times, lost {lossCount} times and tied {tieCount} times.");
                 Console.WriteLine("GoodBye");
+                Console.ReadKey();
                 Environment.Exit(0);
             }
             else
