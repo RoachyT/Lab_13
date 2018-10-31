@@ -8,6 +8,10 @@ namespace Lab_13
 {
     class Program
     {
+        static int winCount = 0;
+        static int tieCount = 0;
+       static int lossCount = 0;
+
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Rock, Paper, Scissors!");
@@ -29,6 +33,7 @@ namespace Lab_13
             int inputOpp = int.Parse(Console.ReadLine());
             Console.WriteLine("Rock, Paper or Scissors? R/P/S?");
             string shoot = (Console.ReadLine().ToUpper());
+                
                 Validator Val = new Validator();
                 bool flag = true;
                 flag = Val.Validation(shoot);
@@ -44,16 +49,20 @@ namespace Lab_13
                         if (opponent == Roshambo.Rock && user == Roshambo.Rock)
                         {
                             Console.WriteLine("Draw!");
+                            tieCount++;
                             PlayAgain(User);
+
                         }
                         if (opponent == Roshambo.Rock && user == Roshambo.Paper)
                         {
                             Console.WriteLine($"{User.Name} wins!");
+                            winCount++;
                             PlayAgain(User);
                         }
                         if (opponent == Roshambo.Rock && user == Roshambo.Scissors)
                         {
                             Console.WriteLine($"Bowser wins!");
+                            lossCount++;
                             PlayAgain(User);
                         }
 
@@ -67,25 +76,31 @@ namespace Lab_13
                         if (opponent == Roshambo.Rock && user == Roshambo.Rock || opponent == Roshambo.Paper && user == Roshambo.Paper || opponent == Roshambo.Scissors && user == Roshambo.Scissors)
                         {
                             Console.WriteLine("Draw!");
+                            tieCount++;
                             PlayAgain(User);
                         }
                         else if (opponent == Roshambo.Rock && user == Roshambo.Paper || opponent == Roshambo.Paper && user == Roshambo.Scissors || opponent == Roshambo.Scissors && user == Roshambo.Rock)
                         {
                             Console.WriteLine($"{User.Name} wins!");
+                            winCount++;
                             PlayAgain(User);
                         }
                         else
                         {
                             Console.WriteLine($"Princess Peach wins!");
+                            lossCount++;
                             PlayAgain(User);
                         }
                     }
                     else
                     {
                         Console.WriteLine("That was nonsense, try again");
+                        PlayAgain(User);
 
                     }
                 }
+                Console.WriteLine("Try again");
+                GameON(User);
             }
             catch (FormatException)
             {
@@ -105,9 +120,9 @@ namespace Lab_13
             }
             else if (playAgain == "no" || playAgain == "n")
             {
+                Console.WriteLine($"You won {winCount} times, lost {lossCount} times and tied {tieCount} times.");
                 Console.WriteLine("GoodBye");
                 Environment.Exit(0);
-
             }
             else
             {
